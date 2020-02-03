@@ -1,0 +1,7 @@
+moving phone pointer off laptop causes huge angular discrepancy.
+possible explanation:
+	gyro uses earth's magnetic field to generate angles( as shown by doc: 0 degrees => north )
+	laptop probably generates a magnetic field different in orientation than earth's
+
+possible fix:
+	i've got no idea
