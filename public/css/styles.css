@@ -1,0 +1,100 @@
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+
+html, body {
+	margin: 0;
+	background-color: #cccccc;
+}
+
+canvas {
+	touch-action: none;
+	image-rendering: -moz-crisp-edges;
+  	image-rendering: -webkit-crisp-edges;
+    	image-rendering: pixelated;
+      	image-rendering: crisp-edges;
+}
+
+#pointer {
+	width: 10px;
+	height: 10px;
+	background-color: #ff0000;
+	border-radius: 5px;
+}
+
+#root {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#root * {
+  -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+           -khtml-user-select: none; /* Konqueror HTML */
+	          -moz-user-select: none; /* Old versions of Firefox */
+		          -ms-user-select: none; /* Internet Explorer/Edge */
+			              user-select: none;
+}
+
+.input_boxes{
+    @apply appearance-none border-2 border-gray-200 rounded py-1  text-gray-700 leading-tight
+}
+
+.input_boxes:focus{
+    @apply outline-none bg-white border-purple-500
+}
+
+.center {
+    text-align:center;
+    width: 300px;
+    height: 200px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin:auto;
+}
+
+.rainbow {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 20px;
+}
+
+.rainbow::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px rgba(0,0,0,.5);
+  background: linear-gradient(to right,
+        hsl(0, 100%, 50%) 0%, 
+        hsl(36, 100%, 50%) 10%,
+        hsl(72, 100%, 50%) 20%,
+        hsl(108, 100%, 50%) 30%,
+        hsl(144, 100%, 50%) 40%,
+        hsl(180, 100%, 50%) 50%,
+        hsl(216, 100%, 50%) 60%,
+        hsl(252, 100%, 50%) 70%,
+        hsl(288, 100%, 50%) 80%,
+        hsl(324, 100%, 50%) 90%,
+        hsl(360, 100%, 50%) 100%
+    );
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+
+.rainbow::-webkit-slider-thumb {
+  height: 25px;
+  width: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5.5px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,.5);
+}
