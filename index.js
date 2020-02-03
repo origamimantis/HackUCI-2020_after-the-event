@@ -36,7 +36,7 @@ http.createServer(function (req, res) {
     res.end();
 }).listen(80);
 
-let server = https.createServer(options, app).listen(port, () => console.log("I 80"));
+let server = https.createServer(options, app).listen(port, () => console.log("i live"));
 
 const io = require("socket.io")(server);
 
@@ -57,14 +57,18 @@ function addSocket(id, socket)
 	}
 
 }
-function removeSocket(id)
+function removeSocket(socket)
 {
-	let arr = users[id];
+	let arr = users[socket.pairId];
 	for (let i = 0; i < arr.length; ++i)
 	{
-		if (arr[i].pairId == id)
+		if (arr[i] == socket)
 		{
 			arr.splice(i, 1);
+
+			if (arr.length == 0)
+			{	delete users[socket.pairId]; }
+
 			return;
 		}
 	}
@@ -72,12 +76,14 @@ function removeSocket(id)
 
 
 io.on("connection", (socket)=>
-  {
+{
 	var id = crypto.randomBytes(2).toString('hex').toLowerCase();
-	//  console.log(id);
+
+
 	socket.pairId = id;
-	socket.emit('id', {id:id})	
 	addSocket(id, socket);
+	
+	socket.emit('id', {id:id})	
 
 	socket.on('canvas_data',(data)=> {
 		  for (let sock of users[socket.pairId])
@@ -86,13 +92,17 @@ io.on("connection", (socket)=>
 		  }
 		//console.log(data);
 	});
+
 	socket.on('pair',(new_id)=> {
-		if (new_id.length>0 && new_id != socket.pairId){
+		if (new_id.length>0 && new_id != socket.pairId)
+		{
+			removeSocket(socket);
+
 			new_id = new_id.toLowerCase();
-			removeSocket(socket.pairId);
 			socket.pairId = new_id;
+
 			addSocket(new_id, socket);
-			console.log(users[new_id].length);
+
 			socket.emit('id', {id:new_id})	
 		}
 		
@@ -103,6 +113,10 @@ io.on("connection", (socket)=>
 			  sock.emit("cursor", xy);
 		  }
 			
+	});
+
+	socket.on('disconnect',()=> {
+		removeSocket(socket);
 	});
 	socket.on('debug',(stuff)=> {
 		console.log(stuff);
