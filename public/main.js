@@ -63,7 +63,7 @@ function handleOri(e)
 
 	// convert to radians & use trig to avoid 359deg -> 0deg wrapping
 	let x = Math.sin((calib.alpha - lastAngle.alpha)*Math.PI / 180)
-	debug(x*x_sensitivity);
+	debug((calib.alpha - lastAngle.alpha).toFixed(2))
 
 	y = Math.max(Math.min( y_sensitivity*y , 1),-1);
 	x = Math.max(Math.min( x_sensitivity*x , 1), -1);
