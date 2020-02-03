@@ -41,7 +41,7 @@ function recalibrate()
 	calib.gamma = lastAngle.gamma;
 }
 
-const x_sensitivity = 2;
+const x_sensitivity = 2.2;
 const y_sensitivity = 3;
 
 let lastAngle = 
@@ -56,12 +56,14 @@ function handleOri(e)
 {
 	lastAngle.beta = e.beta;
 	//lastAngle.gamma = e.gamma;
-	lastAngle.alpha = e.alpha-180;
+	lastAngle.alpha = e.alpha;
 
 	// guaranteed -1 <= x,y <= 1
 	let y = -(lastAngle.beta-calib.beta)/90;
-	let x = -(lastAngle.alpha-calib.alpha)/45
-	//let x = (e.gamma-calib.gamma)/90;
+
+	// convert to radians & use trig to avoid 359deg -> 0deg wrapping
+	let x = Math.sin((calib.alpha - lastAngle.alpha)*Math.PI / 180)
+	debug(x*x_sensitivity);
 
 	y = Math.max(Math.min( y_sensitivity*y , 1),-1);
 	x = Math.max(Math.min( x_sensitivity*x , 1), -1);
@@ -89,21 +91,6 @@ window.onload = () => {
 	canvas.style.top = window.innerHeight / 2 - canvas.height / 2 + "px";
 	
 	CanvasControl.init(canvas);
-
-	window.navigator.permissions.query({name:"accelerometer"})
-                                 .then((res) => {console.log(res.state)});
-
-	if (window.DeviceMotionEvent)
-	{
-	//	window.addEventListener("devicemotion", handleAcc);
-		window.addEventListener("deviceorientation", handleOri);
-	}
-	else                y = Math.max(Math.min( sensitivity*y , 1),-1);
-
-	{
-		console.log("no accelerometer");
-	}
-
 	
 	let control = CanvasControl;
 	
@@ -117,6 +104,18 @@ window.onload = () => {
 		onServConn.detail.id = e.id;
 		document.dispatchEvent(onServConn);
 	});
+
+
+
+	if (window.DeviceOrientationEvent)
+	{
+		window.addEventListener("deviceorientation", handleOri);
+	}
+	else
+	{
+		console.log("no device orientation data can be found");
+		debug("no device orientation data can be found");
+	}
 
 	debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");
 	// Pointer shiz
