@@ -1,24 +1,24 @@
 const express = require("express");
 const fs = require("fs");
-const https = require('https');
+//const https = require('https');
 var crypto = require('crypto');
 
 
-const KEY = "/etc/letsencrypt/live/applenoodlesmoothie.tech/privkey.pem";
-const CERT = "/etc/letsencrypt/live/applenoodlesmoothie.tech/fullchain.pem";
+//const KEY = "/etc/letsencrypt/live/applenoodlesmoothie.tech/privkey.pem";
+//const CERT = "/etc/letsencrypt/live/applenoodlesmoothie.tech/fullchain.pem";
 
 
-const options = {
-  key: fs.readFileSync(KEY),
-  cert: fs.readFileSync(CERT)
+//const options = {
+ // key: fs.readFileSync(KEY),
+ // cert: fs.readFileSync(CERT)
 
-}
+//}
 
 
 
 const app = express();
-//const port = 8080;
-const port = 443;
+const port = 9990;
+//const port = 443;
 
 
 app.use(express.static(__dirname + "/public"));
@@ -31,12 +31,12 @@ app.get("/",  (req, res) => {
 });
 
 var http = require('http');
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(80);
+//http.createServer(function (req, res) {
+//    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+//    res.end();
+//}).listen(80);
 
-let server = https.createServer(options, app).listen(port, () => console.log("i live"));
+let server = http.createServer(app).listen(port, () => console.log("Live on port " + port));
 
 const io = require("socket.io")(server);
 
