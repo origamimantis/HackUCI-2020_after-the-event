@@ -1,29 +1,11 @@
 const express = require("express");
 const fs = require("fs");
-//const https = require('https');
 var crypto = require('crypto');
-
-
-//const KEY = "/etc/letsencrypt/live/applenoodlesmoothie.tech/privkey.pem";
-//const CERT = "/etc/letsencrypt/live/applenoodlesmoothie.tech/fullchain.pem";
-
-
-//const options = {
- // key: fs.readFileSync(KEY),
- // cert: fs.readFileSync(CERT)
-
-//}
-
-
 
 const app = express();
 const port = 9990;
-//const port = 443;
-
 
 app.use(express.static(__dirname + "/public"));
-
-
 
 app.get("/",  (req, res) => {
 	res.sendFile( __dirname + "/views/index.html");
@@ -31,10 +13,6 @@ app.get("/",  (req, res) => {
 });
 
 var http = require('http');
-//http.createServer(function (req, res) {
-//    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-//    res.end();
-//}).listen(80);
 
 let server = http.createServer(app).listen(port, () => console.log("Live on port " + port));
 
@@ -90,7 +68,6 @@ io.on("connection", (socket)=>
 		  {
 			  sock.emit("draw_data", data);
 		  }
-		//console.log(data);
 	});
 
 	socket.on('pair',(new_id)=> {
