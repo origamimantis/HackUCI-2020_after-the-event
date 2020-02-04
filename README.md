@@ -1,7 +1,7 @@
 # Artist's Real-time Toolkit (ART)
 Currently hosted at the following websites:
 
-https://applenoodlesmoothie.tech
+https://applenoodlesmoothie.tech/
 
 https://art.ratemyclubs.com/
 
