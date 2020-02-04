@@ -45,18 +45,18 @@ function handleOri(e)
 	//lastAngle.gamma = e.gamma;
 	lastAngle.alpha = e.alpha;
 
-	// guaranteed -1 <= x,y <= 1
-	let y = -(lastAngle.beta-calib.beta)/90;
-
-	// convert to radians & use trig to avoid 359deg -> 0deg wrapping
-	let x = Math.sin((calib.alpha - lastAngle.alpha)*Math.PI / 180)
-	debug((calib.alpha - lastAngle.alpha).toFixed(2))
-
-	y = Math.max(Math.min( y_sensitivity*y , 1),-1);
-	x = Math.max(Math.min( x_sensitivity*x , 1), -1);
-
 	if (StateManager.getDrawMode() == StateManager.GYRO)
 	{
+		// guaranteed -1 <= x,y <= 1
+		let y = -(lastAngle.beta-calib.beta)/90;
+
+		// convert to radians & use trig to avoid 359deg -> 0deg wrapping
+		let x = Math.sin((calib.alpha - lastAngle.alpha)*Math.PI / 180)
+		debug((calib.alpha - lastAngle.alpha).toFixed(2))
+
+		y = Math.max(Math.min( y_sensitivity*y , 1),-1);
+		x = Math.max(Math.min( x_sensitivity*x , 1), -1);
+
 		socket.emit("cursor", 
 			{
 				y: (y + 1)*CanvasControl.getCanvasHeight()/2,
