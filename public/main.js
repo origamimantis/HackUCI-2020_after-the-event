@@ -5,19 +5,6 @@ import { CanvasControl } from './CanvasControl.js';
 import { Pointer } from './Pointer.js';
 
 
-let phoneOriOffset = {
-	a: 0,
-	b: 0,
-	c: 0
-}
-
-
-let phoneVel = {
-	x: 0,
-	y: 0,
-	z: 0
-};
-
 let socket;
 
 
