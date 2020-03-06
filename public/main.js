@@ -85,7 +85,7 @@ window.onload = () => {
 
 	// Socketing stuff
 	let onServConn = new CustomEvent("onServConn", { detail: { id : "0000" } });
-	socket = io.connect("https://applenoodlesmoothie.tech");
+	socket = io.connect("https://art.ratemyclubs.com");
 	
 	socket.on("id", (e) => {
 		onServConn.detail.id = e.id;
