@@ -7,6 +7,16 @@ const port = process.env.PORT || 9990;
 
 app.use(express.static(__dirname + "/public"));
 
+
+// redirect to https
+app.all('*', function(req, res, next){
+    if (req.secure) {
+        return next();
+    }
+
+    res.redirect('https://'+req.hostname + req.url);
+});
+
 app.get("/",  (req, res) => {
 	res.sendFile( __dirname + "/views/index.html");
 	
