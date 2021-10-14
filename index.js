@@ -10,11 +10,10 @@ app.use(express.static(__dirname + "/public"));
 
 // redirect to https
 app.all('*', function(req, res, next){
-    if (req.secure) {
-        return next();
-    }
-
+  if (req.headers['x-forwarded-proto'] !== 'https')
     res.redirect('https://'+req.hostname + req.url);
+  else
+    return next();
 });
 
 app.get("/",  (req, res) => {
