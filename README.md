@@ -5,6 +5,8 @@ https://art.ratemyclubs.com/
 
 https://art.kartik-b.com/
 
+https://foonkyart.herokuapp.com/
+
 formerly a hackuci 2020 submission.
 
 original repository can be found at https://github.com/origamimantis/HackUCI-2020
