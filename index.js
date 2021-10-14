@@ -3,7 +3,7 @@ const fs = require("fs");
 var crypto = require('crypto');
 
 const app = express();
-const port = 9990;
+const port = process.env.PORT || 9990;
 
 app.use(express.static(__dirname + "/public"));
 
