@@ -93,15 +93,6 @@ window.onload = () => {
 	});
 
 
-
-	if (window.DeviceOrientationEvent)
-	{
-	}
-	else
-	{
-		console.log("???no device orientation data can be found");
-		debug("???no device orientation data can be found");
-	}
 	window.addEventListener("deviceorientation", handleOri);
 
 	debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");debug("");
