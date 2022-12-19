@@ -5,7 +5,7 @@ https://art.ratemyclubs.com/
 
 https://art.kartik-b.com/
 
-https://foonkyart.herokuapp.com/
+https://foonkyart.onrender.com/
 
 formerly a hackuci 2020 submission.
 
