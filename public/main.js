@@ -85,7 +85,7 @@ window.onload = () => {
 
 	// Socketing stuff
 	let onServConn = new CustomEvent("onServConn", { detail: { id : "0000" } });
-	socket = io.connect("https://foonkyart.herokuapp.com");
+	socket = io.connect("https://foonkyart.onrender.com");
 	
 	socket.on("id", (e) => {
 		onServConn.detail.id = e.id;
